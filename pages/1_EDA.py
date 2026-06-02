@@ -3,13 +3,13 @@ import pandas as pd
 import plotly.express as px
 
 st.set_page_config(page_title="EDA", layout="wide")
-st.title("📊 Exploratory Data Analysis (EDA)")
+st.title("Exploratory Data Analysis (EDA)")
 
 # Fungsi cache agar dataset tidak diload ulang setiap perpindahan halaman
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv('dataset/spotify_dataset_mini.csv', nrows=50000) 
+        df = pd.read_parquet('dataset/spotify_dataset_mini.parquet') 
         
         # Normalisasi label
         df['emotion'] = df['emotion'].astype(str).str.lower().str.strip()

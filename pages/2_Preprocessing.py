@@ -43,15 +43,18 @@ st.markdown("---")
 # EKSEKUSI DATASET
 if st.button("Proses Dataset & Simpan ke Session", type="primary"):
     with st.spinner("Sedang memproses dataset... Ini mungkin memakan waktu sesaat."):
-        df = pd.read_csv('dataset/spotify_dataset_mini.csv')
+        df = pd.read_parquet('dataset/spotify_dataset_mini.parquet')
         df['emotion'] = df['emotion'].str.lower().str.strip()
         mapping = {'angry': 'anger', 'confusion': 'surprise', 'interest': 'surprise'}
         df['emotion'] = df['emotion'].replace(mapping)
         valid_labels = ['joy', 'sadness', 'anger', 'fear', 'love', 'surprise']
         df = df[df['emotion'].isin(valid_labels)]
         
+        # Pastikan tidak mengambil sampel lebih dari jumlah data yang ada
+        actual_sample = min(int(sample_size), len(df))
+
         # Ambil sampel dan proses
-        df_processed = df[['text', 'emotion']].sample(int(sample_size), random_state=42).copy()
+        df_processed = df[['text', 'emotion']].sample(actual_sample, random_state=42).copy()
         df_processed['text'] = df_processed['text'].apply(remove_tags)
         df_processed['text'] = df_processed['text'].apply(basic_clean)
         df_processed['text'] = df_processed['text'].apply(reduce_repetition)

@@ -9,7 +9,7 @@ st.title("📊 Exploratory Data Analysis (EDA)")
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv('dataset/spotify_dataset.csv', nrows=50000) 
+        df = pd.read_csv('dataset/spotify_dataset_mini.csv', nrows=50000) 
         
         # Normalisasi label
         df['emotion'] = df['emotion'].astype(str).str.lower().str.strip()
@@ -52,4 +52,4 @@ if df is not None:
     st.plotly_chart(fig_hist, use_container_width=True)
 
 else:
-    st.warning("Pastikan file 'spotify_dataset.csv' berada di direktori utama.")
+    st.warning("Pastikan file 'spotify_dataset_mini.csv' berada di direktori utama.")

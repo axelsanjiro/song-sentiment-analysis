@@ -28,7 +28,7 @@ with col1:
     min_words = st.slider("Minimal Jumlah Kata per Baris", min_value=1, max_value=20, value=5)
     
 with col2:
-    sample_size = st.number_input("Jumlah Data Sample (Untuk performa web)", min_value=1000, max_value=200000, value=50000, step=10000)
+    sample_size = st.number_input("Jumlah Data Sample (Untuk performa web)", min_value=1000, max_value=50000, value=50000, step=10000)
 
 st.markdown("---")
 
@@ -43,7 +43,7 @@ st.markdown("---")
 # EKSEKUSI DATASET
 if st.button("Proses Dataset & Simpan ke Session", type="primary"):
     with st.spinner("Sedang memproses dataset... Ini mungkin memakan waktu sesaat."):
-        df = pd.read_csv('dataset/spotify_dataset.csv')
+        df = pd.read_csv('dataset/spotify_dataset_mini.csv')
         df['emotion'] = df['emotion'].str.lower().str.strip()
         mapping = {'angry': 'anger', 'confusion': 'surprise', 'interest': 'surprise'}
         df['emotion'] = df['emotion'].replace(mapping)

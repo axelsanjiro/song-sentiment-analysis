@@ -43,7 +43,7 @@ st.markdown("---")
 # EKSEKUSI DATASET
 if st.button("Proses Dataset & Simpan ke Session", type="primary"):
     with st.spinner("Sedang memproses dataset... Ini mungkin memakan waktu sesaat."):
-        df = pd.read_csv('dataset\spotify_dataset.csv')
+        df = pd.read_csv('dataset/spotify_dataset.csv')
         df['emotion'] = df['emotion'].str.lower().str.strip()
         mapping = {'angry': 'anger', 'confusion': 'surprise', 'interest': 'surprise'}
         df['emotion'] = df['emotion'].replace(mapping)

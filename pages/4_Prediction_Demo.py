@@ -25,16 +25,16 @@ def preprocess_lyrics(text):
     text = reduce_repetition(text)
     return text
 
-# --- LOAD MODEL (CACHE) ---
-@st.cache_resource
+# --- LOAD MODEL ---
 def load_model():
+    # 1. Cek apakah model ada di session state (baru saja di-train)
+    if 'trained_model' in st.session_state:
+        return st.session_state['trained_model']
+    
+    # 2. Kalau tidak ada, coba load dari file .pkl lokal
     try:
-        model = joblib.load('emotion_model.pkl')
-        return model
-    except FileNotFoundError:
-        return None
-    except Exception as e:
-        st.error(f"Terjadi kesalahan saat memuat model: {e}")
+        return joblib.load('emotion_model.pkl')
+    except Exception:
         return None
 
 pipeline = load_model()

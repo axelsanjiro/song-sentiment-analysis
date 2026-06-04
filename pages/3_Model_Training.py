@@ -74,7 +74,9 @@ else:
             # 5. Simpan Model menggunakan Joblib
             joblib.dump(pipeline, "emotion_model.pkl")
             
-            st.success("Training Selesai! Model berhasil disimpan sebagai 'emotion_model.pkl'.")
+            st.session_state['trained_model'] = pipeline 
+            
+            st.success("🎉 Training Selesai! Model berhasil disimpan...")
             
             # --- TAMPILAN HASIL ---
             st.markdown("### Hasil Evaluasi Model (Classification Report)")

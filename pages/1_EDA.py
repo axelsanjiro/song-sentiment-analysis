@@ -34,14 +34,14 @@ if df is not None:
     with col1:
         st.write("### Distribusi Kategori Emosi")
         emotion_counts = df['emotion'].value_counts().reset_index()
-        emotion_counts.columns = ['Emotion', 'Count']
+        emotion_counts.columns = ['Emotion', 'Count']   
         fig_bar = px.bar(emotion_counts, x='Emotion', y='Count', color='Emotion', text_auto=True)
-        st.plotly_chart(fig_bar, width=True)
+        st.plotly_chart(fig_bar, use_container_width=True)
         
     with col2:
         st.write("### Persentase Emosi (Pie Chart)")
         fig_pie = px.pie(emotion_counts, names='Emotion', values='Count', hole=0.3)
-        st.plotly_chart(fig_pie, width=True)
+        st.plotly_chart(fig_pie, use_container_width=True)
         
     st.write("### Analisis Panjang Teks (Jumlah Kata)")
     # Hitung jumlah kata per baris untuk visualisasi
@@ -49,7 +49,7 @@ if df is not None:
     sample_df['word_count'] = sample_df['text'].apply(lambda x: len(str(x).split()))
     fig_hist = px.histogram(sample_df, x='word_count', color='emotion', nbins=50, 
                             title="Distribusi Panjang Lirik per Emosi (Sample 10k data)")
-    st.plotly_chart(fig_hist, width=True)
+    st.plotly_chart(fig_hist, use_container_=True)
 
 else:
     st.warning("Pastikan file 'spotify_dataset_mini.csv' berada di direktori utama.")

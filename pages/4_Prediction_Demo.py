@@ -61,7 +61,7 @@ lyrics_input = st.text_area(
 )
 
 # --- INFERENCE SECTION ---
-if st.button("Analisis Emosi", type="primary", width=True):
+if st.button("Analisis Emosi", type="primary", use_container_width=True):
     if not pipeline:
         st.error("Model belum siap! Silakan buka halaman **Model Training** terlebih dahulu dan jalankan proses training untuk membuat file 'emotion_model.pkl'.")
     elif lyrics_input.strip() == "":

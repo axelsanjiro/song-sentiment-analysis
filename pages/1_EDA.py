@@ -49,7 +49,7 @@ if df is not None:
     sample_df['word_count'] = sample_df['text'].apply(lambda x: len(str(x).split()))
     fig_hist = px.histogram(sample_df, x='word_count', color='emotion', nbins=50, 
                             title="Distribusi Panjang Lirik per Emosi (Sample 10k data)")
-    st.plotly_chart(fig_hist, use_container_=True)
+    st.plotly_chart(fig_hist, use_container_width=True)
 
 else:
     st.warning("Pastikan file 'spotify_dataset_mini.csv' berada di direktori utama.")
